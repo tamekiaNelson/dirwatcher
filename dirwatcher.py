@@ -62,10 +62,10 @@ def signal_handler(sig_num, frame):
     logger.warn('Received ' + signal.Signals(sig_num).name)
     # log the signal name (the python2 way)
     # logger.warn('Received ' + signames[sig_num])
-    signames = dict((k, v) for v, k in reversed(
-            sorted(signal.__dict__.items()))
-                    if v.startswith('SIG') and not v.startswith('SIG_'))
-    logger.warn('Received ' + signames[sig_num])
+    # signames = dict((k, v) for v, k in reversed(
+    #         sorted(signal.__dict__.items()))
+    #                 if v.startswith('SIG') and not v.startswith('SIG_'))
+    # logger.warn('Received ' + signames[sig_num])
     global exit_flag
     exit_flag = True
 
@@ -95,7 +95,7 @@ def main():
     # to my process.
     parser = create_parser()
     args = parser.parse_args()
-    uptime = datetime.datetime.now() - app_start_time
+    
     logger.info("Starting dirwatcher, looking for magic text")
     while not exit_flag:
         try:
@@ -115,15 +115,17 @@ def main():
             # usage at 100%
     # final exit point happens here
     # Log a message that we are shutting down
+    
+    logger.info("Ending dirwatcher")
     # Include the overall uptime since program start.
+    uptime = datetime.datetime.now() - app_start_time
     logger.info(
         '\n'
         '----------------------------------------------------\n'
         '   Stopped {0}\n'
         '   Uptime was {1}\n'
         '----------------------------------------------------\n'
-        .format(__file__, str(uptime))
-    )
+        .format(__file__, str(uptime)))
 
 
 if __name__ == '__main__':
