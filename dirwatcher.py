@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """dirwatcher assignment"""
 
-__author__ = "tamekiaNelson"
+__author__ = "tamekiaNelson, with help from piero"
 
 import logging
 import datetime
